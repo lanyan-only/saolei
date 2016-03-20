@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery.js"></script>
+</head>
+<style>
+body{
+	margin:0;
+	padding:0;
+	background: url(img/body.png);
+	background-size: cover
+}
+	.sence{
+		width: 600px;
+		height:600px;
+		border:1px solid blue;
+		margin:20px auto;
+		background: rgba(255,255,255,0.2);
+	}
+	.block{
+		font-style: italic;
+		font-weight: bold;
+		font-size:16px;
+		line-height: 22px;
+		text-align:center;
+		float:left;
+		width:28px;
+		height:28px;
+		border:1px solid blue;
+		
+	}
+	.purple{
+		background: purple;
+	}
+	.pink{
+		background: pink;
+	}
+	.blue{
+		background: blue;
+	}
+	.green{
+		background: green;
+	}
+	.yellow{
+		background: yellow;
+	}
+	.brown{
+		background: brown;
+	}
+	.beijing{
+		background: url(img/beijing.png);
+		z-index: 2;
+	}
+	
+	.scale{
+		animation:fangda 2s ease;
+		background: url(img/lei.png);
+        background-size:28px 28px;
+		
+		;
+	}
+	@keyframes fangda{
+		0%{
+			transform: scale(1,1);
+            background: url(img/lei.png);
+            background-size:28px 28px;
+            border:1px solid rgba(255,255,255,0)
+		}
+		50%{
+			background: url(img/baozha.png);
+			background-size: 28px 28px;
+			transform: scale(1.3,1.3);
+			border:1px solid rgba(255,255,255,0)
+		}
+		100%{
+			transform: scale(1,1);
+            background: url(img/baozha.png);
+            background-size: 28px 28px;
+            border:1px solid rgba(255,255,255,0)
+		}
+	}
+</style>
+<body>
+	<div class="sence"></div>
+</body>
+
+<script>
+ $(function(){
+ 	var hualei="";
+ 	var row=$(".sence").width()-200;
+ 	for (var i = 0; i < 22*22; i++) {
+ 	    hualei+="<div></div>";
+ 	}
+ 	
+ 	$(".sence").html(hualei).find("div").addClass('block beijing');
+ 	$(".sence div:lt(22)").removeClass();
+ 	$(".sence div:gt(462)").removeClass();
+ 	$(".sence div:nth-child(22n+1)").removeClass();
+ 	$(".sence div:nth-child(22n)").removeClass();   
+
+     $(".sence div").each(function(i){
+         $(this).data("index",i);
+     }).end().find(".block")
+     .each(function(i){
+
+ 		if(Math.random()>0.8){
+ 			$(this).data("lei",true);
+ 		}
+ 		
+ 	}).click(function(){
+ 		
+ 		if($(this).data("lei")){
+ 			
+ 			alert("撞到雷了");
+ 			$(".sence div").each(function(i){
+                  if($(this).data("lei")){
+                  	$(this).addClass("lei scale");
+                  }
+                  $(this).css("animation-delay",(Math.random()*2).toFixed(2)+"s");
+                  
+ 			})
+ 			
+ 			
+ 		}
+ 		else{
+ 			var shuzi=0;
+ 			var prop=$(this).data("index");
+ 			if($(".sence div").eq(prop-1).data("lei")){shuzi++};
+ 			if($(".sence div").eq(prop+1).data("lei")){shuzi++};
+ 			if($(".sence div").eq(prop-21).data("lei")){shuzi++};
+ 			if($(".sence div").eq(prop-23).data("lei")){shuzi++};
+ 			if($(".sence div").eq(prop-22).data("lei")){shuzi++};
+ 			if($(".sence div").eq(prop+21).data("lei")){shuzi++};
+ 			if($(".sence div").eq(prop+22).data("lei")){shuzi++};
+ 			if($(".sence div").eq(prop+23).data("lei")){shuzi++};
+ 			$(this).text(shuzi).removeClass("beijing");
+ 		}        // $(this).text($(this).data("index"));
+ 		// alert($(this).index());
+ 	})
+})
+
+
+
+</script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>扫雷</title>
+	<script src="jquery.js"></script>
+</head>
+<style>
+	.sence{
+		width:400px;
+		height:400px;
+		border:1px solid blue;
+		opacity: 0.5;
+	}
+	.xiaolei{
+       width:18px;
+      height:18px;
+      border:1px solid black;
+      float:left;
+	}
+	.sence div.red{
+		background: red;
+
+	}
+	.yellow{
+		background: yellow;
+	}
+	.pink{
+		background: pink;
+	}
+
+	div[lei]{
+        background: blue;
+	}
+</style>
+<body>
+<div class="sence"></div>
+
+	
+</body>
+<script>
+	$(function(){
+		var h="";
+		for (var i = 0; i < 400; i++) {
+		    h+="<div class='xiaolei'></div>";
+		}
+		$(".sence").html(h);
+		// var yanse=["yellow","pink"];
+		// $(".sence div").addClass(function(i){
+		// 	return yanse[i%2];
+		// })
+        $(".sence div").attr("lei",function(){
+        	if(Math.random()>0.8){
+        		return "true";
+        	}
+        })
+        $(".sence div").click(function(){
+        	if($(this).attr("lei")){
+        		alert("爆炸");
+        		$(".sence div[lei=true]").addClass("red");
+        	}
+        })
+
+	})
+</script>
+</html>

@@ -10,7 +10,7 @@ body{
 	margin:0;
 	padding:0;
 	background: url(img/body.png);
-	background-size: cover;
+	background-size: cover
 }
 	.sence{
 		width: 600px;
@@ -20,7 +20,6 @@ body{
 		background: rgba(255,255,255,0.2);
 	}
 	.block{
-		font-style: italic;
 		font-weight: bold;
 		font-size:16px;
 		line-height: 22px;
@@ -81,6 +80,12 @@ body{
             border:1px solid rgba(255,255,255,0)
 		}
 	}
+	#qizi{
+		width:28px;
+		height:28px;
+		background:url(img/qizi.png);
+		background-size: 28px 28px;
+	}
 </style>
 <body>
 	<div class="sence"></div>
@@ -110,7 +115,6 @@ body{
  		}
  		
  	}).click(function(){
- 		
  		if($(this).data("lei")){
  			
  			alert("撞到雷了");
@@ -118,8 +122,7 @@ body{
                   if($(this).data("lei")){
                   	$(this).addClass("lei scale");
                   }
-                  $(this).css("animation-delay",(Math.random()*2).toFixed(2)+"s");
-                  
+                  $(this).css("animation-delay",(Math.random()*2).toFixed(2)+"s");     
  			})
  			
  			
@@ -138,7 +141,20 @@ body{
  			$(this).text(shuzi).removeClass("beijing");
  		}        // $(this).text($(this).data("index"));
  		// alert($(this).index());
+ 		
  	})
+ 	$('.sence').find('.block').mousedown(function(e){
+	      if(e.which==3){
+	        console.dir($(this));
+             $(this).html("<div id='qizi'></div>");
+	       }else if(e.which==1){
+              $(this).html("");
+	       }
+	})
+
+ 	 document.oncontextmenu=function(){ 
+       return false; 
+     }
 })
 
 
